@@ -62,7 +62,7 @@ ma_sound loaded_sounds[MAX_SOUNDS] = {};
 void InitialiseSoundEffects(ma_sound *loaded_sounds){ 
     ma_result Titlescreen_BGM_result = ma_sound_init_from_file(
     &engine,
-    "Mercury.wav",
+    "Audio/Mercury.wav",
     0,
     NULL,
     NULL,
@@ -71,7 +71,7 @@ void InitialiseSoundEffects(ma_sound *loaded_sounds){
 ma_sound_set_looping(&loaded_sounds[Titlescreen_MUSIC], TRUE);
     ma_result level_1_BGM_result = ma_sound_init_from_file(
     &engine,
-    "Mars.wav",
+    "Audio/Mars.wav",
     0,
     NULL,
     NULL,
@@ -81,7 +81,7 @@ ma_sound_set_looping(&loaded_sounds[Level_1], TRUE);
 ma_sound_set_looping(&loaded_sounds[Titlescreen_MUSIC], TRUE);
    ma_result Level_2_result = ma_sound_init_from_file(
     &engine,
-    "Venus.wav",
+    "Audio/Venus.wav",
     0,
     NULL,
     NULL,
@@ -90,7 +90,7 @@ ma_sound_set_looping(&loaded_sounds[Titlescreen_MUSIC], TRUE);
 ma_sound_set_looping(&loaded_sounds[Level_2], TRUE);
 ma_result Level_3_result = ma_sound_init_from_file(
     &engine,
-    "BossMain.wav",
+    "Audio/BossMain.wav",
     0,
     NULL,
     NULL,
@@ -99,7 +99,7 @@ ma_result Level_3_result = ma_sound_init_from_file(
 ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
     ma_result BossBGM_result = ma_sound_init_from_file(
     &engine,
-    "BossMain.wav",
+    "Audio/BossMain.wav",
     0,
     NULL,
     NULL,
@@ -107,7 +107,7 @@ ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
 );
   ma_result BossIntro_result = ma_sound_init_from_file(
     &engine,
-    "BossIntro.wav",
+    "Audio/BossIntro.wav",
     0,
     NULL,
     NULL,
@@ -115,7 +115,7 @@ ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
 );
     ma_result MachineGun_result = ma_sound_init_from_file(
     &engine,
-    "D_24P.wav",
+    "Audio/D_24P.wav",
     0,
     NULL,
     NULL,
@@ -123,7 +123,7 @@ ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
 );
     ma_result Laser_result = ma_sound_init_from_file(
     &engine,
-    "sfx_wpn_laser11.wav",
+    "Audio/sfx_wpn_laser11.wav",
     0,
     NULL,
     NULL,
@@ -131,7 +131,7 @@ ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
 );
     ma_result Bomb_result = ma_sound_init_from_file(
     &engine,
-    "sfx_exp_medium2.wav",
+    "Audio/sfx_exp_medium2.wav",
     0,
     NULL,
     NULL,
@@ -139,7 +139,7 @@ ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
 );
     ma_result Missile_result = ma_sound_init_from_file(
     &engine,
-    "sfx_wpn_missilelaunch.wav",
+    "Audio/sfx_wpn_missilelaunch.wav",
     0,
     NULL,
     NULL,
@@ -147,7 +147,7 @@ ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
 );
     ma_result Player_life_lost_result = ma_sound_init_from_file(
     &engine,
-    "sfx_deathscream_alien4.wav",
+    "Audio/sfx_deathscream_alien4.wav",
     0,
     NULL,
     NULL,
@@ -155,7 +155,7 @@ ma_sound_set_looping(&loaded_sounds[Level_3], TRUE);
 );
     ma_result Enemy_down_result = ma_sound_init_from_file(
     &engine,
-    "sfx_deathscream_robot3.wav",
+    "Audio/sfx_deathscream_robot3.wav",
     0,
     NULL,
     NULL,
