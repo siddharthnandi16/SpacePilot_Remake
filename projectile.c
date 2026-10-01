@@ -92,7 +92,7 @@ Projectile projectiles_backup[MAX_PROJECTILES] = {
 };
 const WeaponType spiral_cannon = {
    .display_name = "Starburst Cannon", .cooldown_frames = 20, .number = 24, .angle= 90, .type= BULLET, .modes = NORMAL
-    ,.weapon_id = PLASMACANNON_ID, .offset_angle = 15, .omnidirectional = TRUE
+    ,.weapon_id = SPIRAL_CANNON_ID, .offset_angle = 15, .omnidirectional = TRUE
 };
 const WeaponType Minigun = {
    .display_name = "Minigun", .cooldown_frames = 5, .number = 5, .angle= 90, .type= BULLET, .modes = NORMAL
@@ -104,7 +104,7 @@ const WeaponType Grand_Cannon = {
 };
 const WeaponType Plasma_Storm = {
    .display_name = "Storm of Plasma", .cooldown_frames = 12, .number = 7, .angle= 90, .type= PLASMA, .modes = NORMAL
-    ,.weapon_id = GRAND_CANNON_ID, .offset_angle = 5, .omnidirectional = FALSE
+    ,.weapon_id = PLASMA_STORM_ID, .offset_angle = 5, .omnidirectional = FALSE
 };
 //List of enemy weapon types. All enemy weapon types are capitalised
 const WeaponType GRUNT_RIFLE = {
