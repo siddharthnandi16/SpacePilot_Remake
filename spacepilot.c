@@ -27,7 +27,12 @@ Planned additional features: Music, Power-Ups, unlockable upgrades, screen-clear
 #include "hud.h"
 #include "miniaudio.h"
 #include "highscores.h"
+#include "parser.h"
 int game_over =0; //1= true, 0=false
+//Function to load data from JSON files
+void LoadData(){
+    LoadWeapons();
+}
 //This function sets the player's current movement speed to their top speed
 void setplayermovement(struct Player *player){
 player->dx = player->vx;
@@ -184,6 +189,7 @@ int main(){
     //Debug function used to check whether consoles resizing is working properly
 // forceConsoleSize_debug(100,30);
 initscr();
+LoadData();
 init_levels();
 forceConsoleSize(100,30);
 int max_x, max_y;

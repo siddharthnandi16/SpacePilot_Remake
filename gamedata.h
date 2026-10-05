@@ -3,6 +3,7 @@
 //Defines for current size of playfield
 #define PLAYFIELD_W 100
 #define PLAYFIELD_H 26
+#include <pdcurses.h>
 //Stores current game tick
 extern int unsigned long tick;
 //Stores current level
@@ -40,7 +41,7 @@ GRUNT_WEAPON_ID, LASERCANNON_ID, PLASMACANNON_ID, RAPIDFIRE_RIFLE_ID, LASER_RIFL
 CARRIER_CANNON_ID, CARRIER_FLAK_ID, FRIGATE_FLAK_ID, FRIGATE_LASER_ID,
 MINIGUN_ID, GRAND_CANNON_ID, PLASMA_STORM_ID, MISSILE_STORM_ID}WeaponID;
 typedef enum modes{REGULAR, BURST_FIRE, RAPID_FIRE, SUPERCHARGE, CHARGING}FireModes;
-const typedef struct WeaponType{
+typedef struct WeaponType{
     char *display_name;
     int cooldown_frames;
     int number; //Number of projectiles fired

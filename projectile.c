@@ -46,113 +46,113 @@ Projectile projectiles_backup[MAX_PROJECTILES] = {
     }
 };
 //List of player weapon types. All player weapons are in lowercase
- const WeaponType autopistol = {
-   .display_name = "Autocannon", .cooldown_frames = 4, .number = 1, .angle= 90, .type= BULLET, .modes = NORMAL
+ WeaponType autopistol = {
+   .display_name = "Autocannon", .cooldown_frames = 4, .number = 1, .angle= 90, .type= BULLET, .modes =  REGULAR
 ,.weapon_id = AUTOPISTOL_ID
 };
-  const WeaponType machinegun = {
-   .display_name = "Machine Gun", .cooldown_frames = 3, .number = 1, .angle= 90, .type= BULLET, .modes = NORMAL
+WeaponType machinegun = {
+   .display_name = "Machine Gun", .cooldown_frames = 3, .number = 1, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = MACHINEGUN_ID
 };
-  const WeaponType laserrifle = {
-   .display_name = "Las-Cannon 1000", .cooldown_frames = 15, .number = 1, .angle= 90, .type= LASER, .modes = NORMAL
+  WeaponType laserrifle = {
+   .display_name = "Las-Cannon 1000", .cooldown_frames = 15, .number = 1, .angle= 90, .type= LASER, .modes =  REGULAR
     ,.weapon_id = LASRIFLE_PLAYER_ID
 };
-  const WeaponType bomblauncher = {
-  .display_name = "Shrapnel Bomb",  .cooldown_frames = 25, .number = 1, .angle= 90, .type= BOMB, .modes = NORMAL
+WeaponType bomblauncher = {
+  .display_name = "Shrapnel Bomb",  .cooldown_frames = 25, .number = 1, .angle= 90, .type= BOMB, .modes =  REGULAR
     ,.weapon_id = BOMB_PLAYER_ID
 };
-  const WeaponType missilelauncher = {
-   .display_name = "Homing Missile", .cooldown_frames = 60, .number = 2, .angle= 90, .type= MISSILE, .modes = NORMAL
+ WeaponType missilelauncher = {
+   .display_name = "Homing Missile", .cooldown_frames = 60, .number = 2, .angle= 90, .type= MISSILE, .modes =  REGULAR
     ,.weapon_id = MISSILE_PLAYER_ID, .offset_angle = 10
 };
- const WeaponType plasmarifle = {
-   .display_name = "Plasma Gun", .cooldown_frames = 4, .number = 1, .angle= 90, .type= PLASMA, .modes = NORMAL
+   WeaponType plasmarifle = {
+   .display_name = "Plasma Gun", .cooldown_frames = 4, .number = 1, .angle= 90, .type= PLASMA, .modes =  REGULAR
     ,.weapon_id = PLASMARIFLE_PLAYER_ID
 };
-  const WeaponType empbomb = {
-   .display_name = "EMP", .cooldown_frames = 300, .number = 1, .angle= 90, .type= EMP, .modes = NORMAL
+    WeaponType empbomb = {
+   .display_name = "EMP", .cooldown_frames = 300, .number = 1, .angle= 90, .type= EMP, .modes =  REGULAR
     ,.weapon_id = EMP_ID
 };
-  const WeaponType lightning = {
-  .display_name = "Thunderbolt",  .cooldown_frames = 240, .number = 5, .angle= 90, .type= CHAINLIGHTNING, .modes = NORMAL
+    WeaponType lightning = {
+  .display_name = "Thunderbolt",  .cooldown_frames = 240, .number = 5, .angle= 90, .type= CHAINLIGHTNING, .modes =  REGULAR
     ,.weapon_id = LIGHTNING_ID
 };
-  const WeaponType shotgun = {
-   .display_name = "Flak Cannon", .cooldown_frames = 8, .number = 5, .angle= 90, .type= BULLET, .modes = NORMAL
+    WeaponType shotgun = {
+   .display_name = "Flak Cannon", .cooldown_frames = 8, .number = 5, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = SHOTGUN_ID, .offset_angle = 15
 };
-  const WeaponType lasercannon = {
-   .display_name = "Las-Cannon 2000", .cooldown_frames = 30, .number = 3, .angle= 90, .type= LASER, .modes = NORMAL
+    WeaponType lasercannon = {
+   .display_name = "Las-Cannon 2000", .cooldown_frames = 30, .number = 3, .angle= 90, .type= LASER, .modes =  REGULAR
     ,.weapon_id = LASERCANNON_ID, .offset_angle = 15
 };
-  const WeaponType plasmacannon = {
-   .display_name = "Plasma Howitzer", .cooldown_frames = 18, .number = 5, .angle= 90, .type= PLASMA, .modes = NORMAL
+    WeaponType plasmacannon = {
+   .display_name = "Plasma Howitzer", .cooldown_frames = 18, .number = 5, .angle= 90, .type= PLASMA, .modes =  REGULAR
     ,.weapon_id = PLASMACANNON_ID, .offset_angle = 15
 };
-const WeaponType spiral_cannon = {
-   .display_name = "Starburst Cannon", .cooldown_frames = 20, .number = 24, .angle= 90, .type= BULLET, .modes = NORMAL
+  WeaponType spiral_cannon = {
+   .display_name = "Starburst Cannon", .cooldown_frames = 20, .number = 24, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = SPIRAL_CANNON_ID, .offset_angle = 15, .omnidirectional = TRUE
 };
-const WeaponType Minigun = {
-   .display_name = "Minigun", .cooldown_frames = 5, .number = 5, .angle= 90, .type= BULLET, .modes = NORMAL
+  WeaponType Minigun = {
+   .display_name = "Minigun", .cooldown_frames = 5, .number = 5, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = MINIGUN_ID, .offset_angle = 4, .omnidirectional = FALSE
 };
-const WeaponType Grand_Cannon = {
-   .display_name = "Grand Cannon", .cooldown_frames = 50, .number = 5, .angle= 90, .type= BOMB, .modes = NORMAL
+  WeaponType Grand_Cannon = {
+   .display_name = "Grand Cannon", .cooldown_frames = 50, .number = 5, .angle= 90, .type= BOMB, .modes =  REGULAR
     ,.weapon_id = GRAND_CANNON_ID, .offset_angle = 20, .omnidirectional = FALSE
 };
-const WeaponType Plasma_Storm = {
-   .display_name = "Storm of Plasma", .cooldown_frames = 12, .number = 7, .angle= 90, .type= PLASMA, .modes = NORMAL
+  WeaponType Plasma_Storm = {
+   .display_name = "Storm of Plasma", .cooldown_frames = 12, .number = 7, .angle= 90, .type= PLASMA, .modes =  REGULAR
     ,.weapon_id = PLASMA_STORM_ID, .offset_angle = 5, .omnidirectional = FALSE
 };
 //List of enemy weapon types. All enemy weapon types are capitalised
-const WeaponType GRUNT_RIFLE = {
-  .display_name = "autocannon",  .cooldown_frames = 45, .number = 1, .angle= 90, .type= BULLET, .modes = NORMAL
+  WeaponType GRUNT_RIFLE = {
+  .display_name = "autocannon",  .cooldown_frames = 45, .number = 1, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = GRUNT_WEAPON_ID
 };
-const WeaponType RAPIDFIRE_RIFLE = {
-   .display_name = "autocannon", .cooldown_frames = 15, .number = 1, .angle= 90, .type= BULLET, .modes = NORMAL
+  WeaponType RAPIDFIRE_RIFLE = {
+   .display_name = "autocannon", .cooldown_frames = 15, .number = 1, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = RAPIDFIRE_RIFLE_ID
 };
-  const WeaponType LASER_RIFLE_ENEMY = {
-  .display_name = "autocannon",  .cooldown_frames = 90, .number = 1, .angle= 90, .type= LASER, .modes = NORMAL
+    WeaponType LASER_RIFLE_ENEMY = {
+  .display_name = "autocannon",  .cooldown_frames = 90, .number = 1, .angle= 90, .type= LASER, .modes =  REGULAR
     ,.weapon_id = LASER_RIFLE_ENEMY_ID
 };
-  const WeaponType BOMB_ENEMY_WEAPON = {
-  .display_name = "autocannon",  .cooldown_frames = 75, .number = 1, .angle= 90, .type= BOMB, .modes = NORMAL
+    WeaponType BOMB_ENEMY_WEAPON = {
+  .display_name = "autocannon",  .cooldown_frames = 75, .number = 1, .angle= 90, .type= BOMB, .modes =  REGULAR
     ,.weapon_id = BOMB_ENEMY_ID
 };
-  const WeaponType HUNTER_RIFLE = {
-   .display_name = "autocannon", .cooldown_frames = 10, .number = 1, .angle= 90, .type= BULLET, .modes = NORMAL
+    WeaponType HUNTER_RIFLE = {
+   .display_name = "autocannon", .cooldown_frames = 10, .number = 1, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = HUNTER_RIFLE_ID
 };
- const WeaponType JET_CANNON = {
-   .display_name = "autocannon", .cooldown_frames = 5, .number = 1, .angle= 90, .type= BULLET, .modes = NORMAL
+   WeaponType JET_CANNON = {
+   .display_name = "autocannon", .cooldown_frames = 5, .number = 1, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = JET_CANNON_ID
 };
-const WeaponType FLYFORT_CANNON = {
-   .display_name = "autocannon", .cooldown_frames = 75, .number = 3, .angle= 90, .type= BOMB, .modes = NORMAL
+  WeaponType FLYFORT_CANNON = {
+   .display_name = "autocannon", .cooldown_frames = 75, .number = 3, .angle= 90, .type= BOMB, .modes =  REGULAR
     ,.weapon_id = FLYFORT_CANNON_ID, .offset_angle = 45
 };
- const WeaponType CARRIER_CANNON = {
-  .display_name = "autocannon",  .cooldown_frames = 150, .number = 3, .angle= 90, .type= BOMB, .modes = NORMAL
+   WeaponType CARRIER_CANNON = {
+  .display_name = "autocannon",  .cooldown_frames = 150, .number = 3, .angle= 90, .type= BOMB, .modes =  REGULAR
     ,.weapon_id = CARRIER_CANNON_ID, .offset_angle = 45
 };
-const WeaponType CARRIER_FLAK = {
-  .display_name = "autocannon",  .cooldown_frames = 90, .number = 5, .angle= 90, .type= BULLET, .modes = NORMAL
+  WeaponType CARRIER_FLAK = {
+  .display_name = "autocannon",  .cooldown_frames = 90, .number = 5, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = CARRIER_FLAK_ID, .offset_angle = 15
 };
-const WeaponType FRIGATE_FLAK = {
-  .display_name = "autocannon",  .cooldown_frames =50, .number = 24, .angle= 90, .type= BULLET, .modes = NORMAL
+  WeaponType FRIGATE_FLAK = {
+  .display_name = "autocannon",  .cooldown_frames =50, .number = 24, .angle= 90, .type= BULLET, .modes =  REGULAR
     ,.weapon_id = FRIGATE_FLAK_ID, .offset_angle = 15
 };
-const WeaponType FRIGATE_LASER = {
-  .display_name = "autocannon",  .cooldown_frames = 50, .number = 1, .angle= 90, .type= LASER, .modes = NORMAL
+  WeaponType FRIGATE_LASER = {
+  .display_name = "autocannon",  .cooldown_frames = 50, .number = 1, .angle= 90, .type= LASER, .modes =  REGULAR
     ,.weapon_id = FRIGATE_LASER_ID
 };
-  const WeaponType missilestorm = {
-   .display_name = "Missile Barrage", .cooldown_frames = 120, .number = 5, .angle= 90, .type= MISSILE, .modes = NORMAL
+    WeaponType missilestorm = {
+   .display_name = "Missile Barrage", .cooldown_frames = 120, .number = 5, .angle= 90, .type= MISSILE, .modes =  REGULAR
     ,.weapon_id = MISSILE_STORM_ID, .offset_angle = 20
 };
 //Function to find a free slot in the enemy pool
@@ -168,7 +168,7 @@ int findfreeprojectileslot(void){
 }
 //Finds the address of a weapon and returns it. 
 //Add a new case each time a new weapon is made
-const WeaponType* get_weapon_template(WeaponID weapon_id) {
+ WeaponType* get_weapon_template(WeaponID weapon_id) {
     switch (weapon_id) {
         case AUTOPISTOL_ID:          return &autopistol;
         case MACHINEGUN_ID:          return &machinegun;
@@ -211,7 +211,7 @@ slot += i;
 if (slot + i == -1){
     return; //Stops execution if there are no free projectile slots
 }
-projectiles[slot + i].state = NORMAL;
+projectiles[slot + i].state =  REGULAR;
 projectiles[slot + i].px = px;
 projectiles[slot + i].py = py;
 projectiles[slot + i].type = weapon->type;
