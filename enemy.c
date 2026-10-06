@@ -6,7 +6,7 @@
 #include "projectile.h"
 #include "window.h"
 #include "enemy.h"
-
+#include "parser.h"
 //Spawning pool for enemies. Values here are placeholders that will be overwritten during spawning
 Enemy enemies[MAX_ENEMIES] = {
     [0] = {
@@ -20,7 +20,7 @@ Enemy enemies[MAX_ENEMIES] = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &GRUNT_RIFLE,
+    .weapon = &weapons[GRUNT_WEAPON_ID],
     .fire_px=0,
     .fire_py=0,
     .aimed = FALSE
@@ -40,7 +40,7 @@ Enemy enemies_backup[MAX_ENEMIES] = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &GRUNT_RIFLE,
+    .weapon = &weapons[GRUNT_WEAPON_ID],
     
     }
 };
@@ -56,7 +56,7 @@ static const Enemy grunt_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &GRUNT_RIFLE,
+    .weapon = &weapons[GRUNT_WEAPON_ID],
     
 };
 // Rapidly fires bullets. Meant to be dangerous in swarms
@@ -71,7 +71,7 @@ static const Enemy rapidfire_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &RAPIDFIRE_RIFLE
+    .weapon = &weapons[RAPIDFIRE_RIFLE_ID]
 };
 //Shoots lasers that travel in a straight line. A dangerous, high-priority target
 static const Enemy laser_template = {
@@ -85,7 +85,7 @@ static const Enemy laser_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &LASER_RIFLE_ENEMY
+    .weapon = &weapons[LASER_RIFLE_ENEMY_ID]
 };
 //Fire bombs that explode into circles of bullets.A dangerous, high-priority target
 static const Enemy bomber_template = {
@@ -99,7 +99,7 @@ static const Enemy bomber_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &BOMB_ENEMY_WEAPON
+    .weapon = &weapons[BOMB_ENEMY_ID]
 };
 //Hunts the player while rapidly firing bullets. The most dangerous basic enemy
 static const Enemy hunter_template = {
@@ -113,7 +113,7 @@ static const Enemy hunter_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &HUNTER_RIFLE
+    .weapon = &weapons[HUNTER_RIFLE_ID]
 };
 
 //Reflects bullets. Designed to shield other enemies from player bullets
@@ -128,7 +128,7 @@ static const Enemy reflector_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = NULL,
-    .weapon = &GRUNT_RIFLE
+    .weapon = &weapons[GRUNT_WEAPON_ID]
 };
 //An enemy that does nothing but acts as a shield for other enemies
 static const Enemy barrier_template = {
@@ -167,7 +167,7 @@ static const Enemy corvette_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Corvette_Layout,
-    .weapon = &RAPIDFIRE_RIFLE
+    .weapon = &weapons[RAPIDFIRE_RIFLE_ID]
 };
 static const Enemy corvette_bomber_template = {
     .px = 0, .py = 0,
@@ -180,7 +180,7 @@ static const Enemy corvette_bomber_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Corvette_Layout,
-    .weapon = &BOMB_ENEMY_WEAPON
+    .weapon = &weapons[BOMB_ENEMY_ID]
 };
 //Layout for jets
 static const int jet_row0_colors[] = {2, 6, 2}; //red, amber, red
@@ -228,7 +228,7 @@ static const Enemy jet_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Jet_Layout,
-    .weapon = &JET_CANNON
+    .weapon = &weapons[JET_CANNON_ID]
 };
 //Special version of jet used as miniboss
 static const Enemy jet_boss_template = {
@@ -242,7 +242,7 @@ static const Enemy jet_boss_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Jet_Layout,
-    .weapon = &JET_CANNON,
+    .weapon =  &weapons[JET_CANNON_ID],
     .is_boss_part = 1,
     .is_boss_core = 0
 };
@@ -275,7 +275,7 @@ static const Enemy Flying_Fortress_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Flying_Fortress_Layout,
-    .weapon = &FLYFORT_CANNON
+    .weapon =  &weapons[FLYFORT_CANNON_ID]
 };
 static const int flyfort_invuln_row0_colors[] = {9, 6, 6, 6, 9}; //purple, amber, amber, amber, purple
 static const int flyfort_invuln_row1_colors[] = {9, 7, 7, 7, 9}; //purple, steel gray, steel gray, steel gray, purple
@@ -304,7 +304,7 @@ static const Enemy Flying_Fortress_Boss_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Flying_Fortress_Layout,
-    .weapon = &FLYFORT_CANNON,
+    .weapon =  &weapons[FLYFORT_CANNON_ID],
     .is_boss_part = 1,
     .is_boss_core = 0
 };
@@ -335,7 +335,7 @@ static const Enemy laser_jet_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Laser_Jet_Layout,
-    .weapon = &laserrifle
+    .weapon =  &weapons[LASER_RIFLE_ENEMY_ID]
 };
 //Template for core of first boss
 // Carrier boss shape — turret sockets marked '.', aircraft bays marked 'o'
@@ -372,7 +372,7 @@ static Enemy carrier_boss_core_template = {
     .state = INACTIVE,
     .behavior = CARRIER_SPECIAL,
     .shape = &carrier_layout,
-    .weapon = &HUNTER_RIFLE,
+    .weapon =  &weapons[HUNTER_RIFLE_ID],
     .is_boss_part = 1, //Is part of the carrier boss
     .is_boss_core = 1 //Is core of the carrier boss
 };
@@ -428,7 +428,7 @@ static Enemy carrier_boss_FLAK_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &flakgun_layout,
-    .weapon = &CARRIER_FLAK,
+    .weapon = &weapons[CARRIER_FLAK_ID],
     .is_boss_part = 1, //Is part of the carrier boss
     .is_boss_core = 0 
 };
@@ -463,7 +463,7 @@ static Enemy carrier_boss_bomb_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &bombcannon_layout,
-    .weapon = &CARRIER_CANNON,
+    .weapon = &weapons[CARRIER_CANNON_ID],
     .is_boss_part = 1, //Is part of the carrier boss
     .is_boss_core = 0 
 };
@@ -506,7 +506,7 @@ static const Enemy frigate1_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Frigate_Layout,
-    .weapon = &FRIGATE_FLAK,
+    .weapon = &weapons[FRIGATE_FLAK_ID],
     .is_boss_part = 1,
     .is_boss_core = 0
 };
@@ -522,7 +522,7 @@ static const Enemy frigate2_template = {
     .state = INACTIVE,
     .behavior = STATIC,
     .shape = &Frigate_Layout,
-    .weapon = &FRIGATE_LASER,
+    .weapon = &weapons[FRIGATE_LASER_ID],
     .is_boss_part = 1,
     .is_boss_core = 0
 };
@@ -607,7 +607,7 @@ static const Enemy Battleship_template = {
     .state = INACTIVE,
     .behavior = BATTLESHIP_SPECIAL,
     .shape = &Battleship_Layout,
-    .weapon = &shotgun,
+    .weapon = &weapons[SHOTGUN_ID],
     .is_boss_part = 1,
     .is_boss_core = 1
 };

@@ -117,6 +117,93 @@ if (cJSON_IsArray(enemy))  ParseWeaponArray(enemy,  weapons, &i, 100);
 weapon_count = i;  
 
 cJSON_Delete(root);  
- fprintf(stderr, "\n Succesfully loaded weapons.\n");
+//Weapon counting is currently bugged
+ fprintf(stderr, "\n Succesfully loaded weapons. Weapon count: %d", weapon_count, "     \n");
 free(weapons_raw);
+}
+
+
+
+
+//Array of structs that stores enemy data
+EnemyDefs enemy_defs[MAX_ENEMY_DEFS] = {0};
+int enemy_def_count = 0;
+//Helper function to get enemy behaviors from the JSON strings
+EnemyBehavior StringToEnemyBehavior(const char *s) {
+    static const EnumEntry table[] = {
+        {"STATIC", STATIC}, {"MOVEHORIZONTALLY", MOVEHORIZONTALLY},
+        {"MOVEVERTICALLY", MOVEVERTICALLY}, {"STRAFE_HORIZONTAL", STRAFE_HORIZONTAL},
+        {"STRAFE_VERTICAL", STRAFE_VERTICAL}, {"HUNT_PLAYER", HUNT_PLAYER},
+        {"ZIGZAG", ZIGZAG}, {"HUNT_PLAYER_FAR", HUNT_PLAYER_FAR},
+        {"CARRIER_SPECIAL", CARRIER_SPECIAL}, {"FRIGATE1_SPECIAL", FRIGATE1_SPECIAL},
+        {"FRIGATE2_SPECIAL", FRIGATE2_SPECIAL}, {"JET_SPECIAL", JET_SPECIAL},
+        {"BATTLESHIP_SPECIAL", BATTLESHIP_SPECIAL}, {"FLYFORT_SPECIAL", FLYFORT_SPECIAL},
+        {"MOTHERSHIP_SPECIAL", MOTHERSHIP_SPECIAL}
+    };
+    return (EnemyBehavior)LookupEnum(table, sizeof table / sizeof table[0], s, STATIC);
+}
+//Function to parse enemies from the file into an array
+void LoadEnemyDefs(void) {
+    FILE *f = fopen("Data/enemies.json", "rb");
+    if (f == NULL) {
+        fprintf(stderr, "ERROR: Enemy file not opened!\n");
+        return;
+    }
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    rewind(f);
+
+    char *raw = malloc(size + 1);
+    if (raw == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        fclose(f);
+        return;
+    }
+    size_t n = fread(raw, 1, size, f);
+    raw[n] = '\0';
+    fclose(f);
+
+    cJSON *root = cJSON_Parse(raw);
+    free(raw);
+    if (root == NULL) {
+        fprintf(stderr, "JSON parse error\n");
+        return;
+    }
+
+    int i = 0;
+    cJSON *item;
+    cJSON_ArrayForEach(item, root) {          // iterates top-level keys in file order
+        if (i >= MAX_ENEMY_DEFS) break;
+        EnemyDefs *e = &enemy_defs[i];
+
+        cJSON *dx  = cJSON_GetObjectItemCaseSensitive(item, "dx");
+        cJSON *dy  = cJSON_GetObjectItemCaseSensitive(item, "dy");
+        cJSON *hp  = cJSON_GetObjectItemCaseSensitive(item, "hp");
+        cJSON *sym = cJSON_GetObjectItemCaseSensitive(item, "symbol");
+        cJSON *w   = cJSON_GetObjectItemCaseSensitive(item, "width");
+        cJSON *h   = cJSON_GetObjectItemCaseSensitive(item, "height");
+        cJSON *cd  = cJSON_GetObjectItemCaseSensitive(item, "cooldown_frames");
+        cJSON *beh = cJSON_GetObjectItemCaseSensitive(item, "behavior");
+        cJSON *wep = cJSON_GetObjectItemCaseSensitive(item, "weapon");
+        cJSON *path = cJSON_GetObjectItemCaseSensitive(item, "sprite_path");
+
+        e->type = i;                           // order of appearance, not the EnemyType enum
+        if (cJSON_IsNumber(dx))  e->dx = (float)dx->valuedouble;
+        if (cJSON_IsNumber(dy))  e->dy = (float)dy->valuedouble;
+        if (cJSON_IsNumber(hp))  e->hp = hp->valueint;
+        if (cJSON_IsString(sym) && sym->valuestring[0] != '\0') e->symbol = sym->valuestring[0];
+        if (cJSON_IsString(sym) && sym->valuestring[0] != '\0') e->symbol = sym->valuestring[0];
+        e->sprite_path = cJSON_IsString(path) ? strdup(path->valuestring) : NULL;
+        if (cJSON_IsNumber(w))   e->width = w->valueint;
+        if (cJSON_IsNumber(h))   e->height = h->valueint;
+        if (cJSON_IsNumber(cd))  e->cooldown_frames = cd->valueint;
+        e->behavior = cJSON_IsString(beh) ? StringToEnemyBehavior(beh->valuestring) : STATIC;
+        e->weapon = cJSON_IsString(wep) ? strdup(wep->valuestring) : NULL;
+
+        i++;
+    }
+    enemy_def_count = i;
+
+    cJSON_Delete(root);
+     fprintf(stderr, "\n Succesfully loaded enemy data. Enemy type count: %d", enemy_def_count, "     \n");
 }

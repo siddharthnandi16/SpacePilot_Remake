@@ -3,3 +3,4 @@ Name: Sid Score: 3 Class: Fighter Jet
 Name: Sid Score: 751 Class: Experimental Fighter
 Name: Sid Score: 619 Class: Fighter Jet
 Name: Sid Score: 631 Class: Flying Fortress
+Name: sid Score: 594 Class: Fighter Jet

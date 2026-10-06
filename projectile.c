@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "sound.h"
 #include "miniaudio.h"
+#include "parser.h"
 #define MAX_PROJECTILES 2000
 //Table for storing projectiles. The values here are placeholders than will be overwritten during gameplay
 Projectile projectiles[MAX_PROJECTILES] = {

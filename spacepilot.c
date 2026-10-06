@@ -32,6 +32,7 @@ int game_over =0; //1= true, 0=false
 //Function to load data from JSON files
 void LoadData(){
     LoadWeapons();
+    LoadEnemyDefs();
 }
 //This function sets the player's current movement speed to their top speed
 void setplayermovement(struct Player *player){
@@ -233,9 +234,11 @@ keypad(stdscr, TRUE);
 setplayermovement(&player);
 player.px = PLAYFIELD_W/2, player.py = (PLAYFIELD_H)/3*2;
 getmaxyx(stdscr, max_y, max_x);
+/*
 fprintf(stderr, "%d", max_y);
 fprintf(stderr, "%d", max_x);
 fprintf(stderr, "%d %d", LINES, COLS);
+*/
 update_playfield_offset(max_x,max_y);
 init_hud(offset_y, offset_x);
 if (hud_win == NULL) fprintf(stderr, "hud_win is NULL! offset_y=%d\n", offset_y);

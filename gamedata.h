@@ -33,13 +33,38 @@ typedef struct Projectile{
     ProjState state;
     bool player_owned;
 }Projectile;
-//This struct defines the behavior of weapons which fire projectiles
-typedef enum weapon_id{EMPTY_ID, AUTOPISTOL_ID, MACHINEGUN_ID, LASRIFLE_PLAYER_ID, BOMB_PLAYER_ID,
-PLASMARIFLE_PLAYER_ID,MISSILE_PLAYER_ID, EMP_ID, LIGHTNING_ID, SHOTGUN_ID, 
-GRUNT_WEAPON_ID, LASERCANNON_ID, PLASMACANNON_ID, RAPIDFIRE_RIFLE_ID, LASER_RIFLE_ENEMY_ID,
- BOMB_ENEMY_ID, HUNTER_RIFLE_ID, JET_CANNON_ID, FLYFORT_CANNON_ID, SPIRAL_CANNON_ID,
-CARRIER_CANNON_ID, CARRIER_FLAK_ID, FRIGATE_FLAK_ID, FRIGATE_LASER_ID,
-MINIGUN_ID, GRAND_CANNON_ID, PLASMA_STORM_ID, MISSILE_STORM_ID}WeaponID;
+//This struct defines the behavior of weapons which fire projectiles, only for built-in weapons
+//Weapons defined by modders do have IDs here
+typedef enum weapon_id {
+    EMPTY_ID,
+    AUTOPISTOL_ID,
+    MACHINEGUN_ID,
+    LASRIFLE_PLAYER_ID,
+    BOMB_PLAYER_ID,
+    MISSILE_PLAYER_ID,
+    PLASMARIFLE_PLAYER_ID,
+    EMP_ID,
+    LIGHTNING_ID,
+    SHOTGUN_ID,
+    LASERCANNON_ID,
+    PLASMACANNON_ID,
+    SPIRAL_CANNON_ID,
+    MINIGUN_ID,
+    GRAND_CANNON_ID,
+    PLASMA_STORM_ID,
+    MISSILE_STORM_ID,
+    GRUNT_WEAPON_ID,
+    RAPIDFIRE_RIFLE_ID,
+    LASER_RIFLE_ENEMY_ID,
+    BOMB_ENEMY_ID,
+    HUNTER_RIFLE_ID,
+    JET_CANNON_ID,
+    FLYFORT_CANNON_ID,
+    CARRIER_CANNON_ID,
+    CARRIER_FLAK_ID,
+    FRIGATE_FLAK_ID,
+    FRIGATE_LASER_ID
+} WeaponID;
 typedef enum modes{REGULAR, BURST_FIRE, RAPID_FIRE, SUPERCHARGE, CHARGING}FireModes;
 typedef struct WeaponType{
     char *display_name;

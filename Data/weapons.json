@@ -1,5 +1,6 @@
 {
   "player_weapons": [
+    {"var_name": "No Weapon", "display_name": "Autocannon", "cooldown_frames": 4, "number": 1, "angle": 90, "type": "BULLET", "modes": "REGULAR", "weapon_id": "EMPTY_ID"},
     {"var_name": "autopistol", "display_name": "Autocannon", "cooldown_frames": 4, "number": 1, "angle": 90, "type": "BULLET", "modes": "REGULAR", "weapon_id": "AUTOPISTOL_ID"},
     {"var_name": "machinegun", "display_name": "Machine Gun", "cooldown_frames": 3, "number": 1, "angle": 90, "type": "BULLET", "modes": "REGULAR", "weapon_id": "MACHINEGUN_ID"},
     {"var_name": "laserrifle", "display_name": "Las-Cannon 1000", "cooldown_frames": 15, "number": 1, "angle": 90, "type": "LASER", "modes": "REGULAR", "weapon_id": "LASRIFLE_PLAYER_ID"},

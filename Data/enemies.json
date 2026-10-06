@@ -10,7 +10,8 @@
     "state": "INACTIVE",
     "behavior": "STATIC",
     "shape": null,
-    "weapon": "GRUNT_RIFLE"
+    "weapon": "GRUNT_RIFLE_ID",
+    "sprite_path": "Sprites/attack-drone.png"
   },
   "rapidfire": {
     "px": 0, "py": 0,
@@ -23,7 +24,8 @@
     "state": "INACTIVE",
     "behavior": "STATIC",
     "shape": null,
-    "weapon": "RAPIDFIRE_RIFLE"
+    "weapon": "RAPIDFIRE_RIFLE_ID",
+    "sprite_path": "Sprites/attack-drone.png"
   },
   "laser": {
     "px": 0, "py": 0,
@@ -36,7 +38,8 @@
     "state": "INACTIVE",
     "behavior": "STATIC",
     "shape": null,
-    "weapon": "LASER_RIFLE_ENEMY"
+    "weapon": "LASER_RIFLE_ENEMY_ID",
+    "sprite_path": "Sprites/attack-drone.png"
   },
   "bomber": {
     "px": 0, "py": 0,
@@ -49,7 +52,8 @@
     "state": "INACTIVE",
     "behavior": "STATIC",
     "shape": null,
-    "weapon": "BOMB_ENEMY_WEAPON"
+    "weapon": "BOMB_ENEMY_WEAPON_ID",
+    "sprite_path": "Sprites/attack-drone.png"
   },
   "hunter": {
     "px": 0, "py": 0,
@@ -62,7 +66,8 @@
     "state": "INACTIVE",
     "behavior": "STATIC",
     "shape": null,
-    "weapon": "HUNTER_RIFLE"
+    "weapon": "HUNTER_RIFLE_ID",
+    "sprite_path": "Sprites/attack-drone.png"
   },
   "reflector": {
     "px": 0, "py": 0,
@@ -75,7 +80,8 @@
     "state": "INACTIVE",
     "behavior": "STATIC",
     "shape": null,
-    "weapon": "GRUNT_RIFLE"
+    "weapon": "GRUNT_RIFLE_ID",
+    "sprite_path": "Sprites/attack-drone.png"
   },
   "barrier": {
     "px": 0, "py": 0,
@@ -88,6 +94,7 @@
     "state": "INACTIVE",
     "behavior": "STATIC",
     "shape": null,
-    "weapon": null
+    "weapon": null,
+    "sprite_path": "Sprites/attack-drone.png"
   }
 }
