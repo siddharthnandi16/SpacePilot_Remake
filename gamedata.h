@@ -108,9 +108,28 @@ typedef struct TileLayout {
     const int  *color_rows[MAX_TILE_HEIGHT];     // Parallel color_pair IDs, one int array per row
 } TileLayout;
 typedef enum trigger{ROW, TICK} TriggerType; //Stores whether an event is triggered by rows_scrolled or ticks that have passed
-typedef enum type{ GRUNT, RAPIDFIRE, LASER_ENEMY, BOMBER, HUNTER, JET, FLYING_FORTRESS,
-     LASER_JET, CARRIER_BOSS, CARRIER_BOSS_FLAK, CARRIER_BOSS_BOMB, FRIGATE1, FRIGATE2, JET_BOSS,
-    BATTLESHIP_BOSS, REFLECTOR, BARRIER, FLYFORT_BOSS, CORVETTE, CORVETTE_BOMBER, MOTHERSHIP } EnemyType;
+typedef enum type{
+    GRUNT,        // 0
+    RAPIDFIRE,    // 1
+    LASER_ENEMY,  // 2
+    BOMBER,       // 3
+    HUNTER,       // 4
+    REFLECTOR,    // 5
+    BARRIER,      // 6
+     JET, 
+     FLYING_FORTRESS,
+     LASER_JET, 
+     CARRIER_BOSS, 
+     CARRIER_BOSS_FLAK, 
+     CARRIER_BOSS_BOMB,
+      FRIGATE1, 
+      FRIGATE2, 
+      JET_BOSS,
+    BATTLESHIP_BOSS,
+    FLYFORT_BOSS, 
+    CORVETTE, 
+    CORVETTE_BOMBER,
+     MOTHERSHIP } EnemyType;
 typedef enum state{INACTIVE, DEAD, ALIVE, DYING } EnemyState;
 typedef enum behavior{ STATIC, MOVEHORIZONTALLY, MOVEVERTICALLY, STRAFE_HORIZONTAL,
      STRAFE_VERTICAL, HUNT_PLAYER, ZIGZAG, HUNT_PLAYER_FAR, CARRIER_SPECIAL, 
