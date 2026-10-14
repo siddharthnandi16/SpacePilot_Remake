@@ -1,138 +1,48 @@
-{
-  "player_debug": {
-    "px": "PLAYFIELD_W/2",
-    "py": "PLAYFIELD_H/3*2",
-    "vx": 2,
-    "vy": 2,
-    "dx": 2,
-    "dy": 2,
-    "alive": 1,
+[
+  {
+    "name": "debug",
+    "class": "PLAYER_DEBUG",
+    "vx": 2, "vy": 2,
     "lives": 8,
-    "hasLasers": true,
-    "hasBombs": true,
+    "hasLasers": true, "hasBombs": true,
     "fire_rate": 20,
     "symbol": "@",
-    "speed_mode_fast": true,
-    "q_was_down": false,
-    "weapon_id": "AUTOPISTOL_ID",
-    "inventory": [
-      "AUTOPISTOL_ID",
-      "MACHINEGUN_ID",
-      "LASRIFLE_PLAYER_ID",
-      "BOMB_PLAYER_ID",
-      "PLASMARIFLE_PLAYER_ID",
-      "MISSILE_PLAYER_ID",
-      "PLASMA_STORM_ID",
-      "GRAND_CANNON_ID",
-      "MINIGUN_ID"
-    ],
-    "invuln_frames": 0,
-    "score": 0,
-    "class": "PLAYER_DEBUG"
+    "weapon": "autopistol",
+    "inventory": ["autopistol", "machinegun", "laserrifle", "bomblauncher",
+                  "plasmarifle", "missilelauncher", "Plasma_Storm",
+                  "Grand_Cannon", "Minigun"]
   },
-  "fighter_jet": {
-    "px": "PLAYFIELD_W/2",
-    "py": "PLAYFIELD_H/3*2",
-    "vx": 3,
-    "vy": 3,
-    "dx": 3,
-    "dy": 3,
-    "alive": 1,
+  {
+    "name": "fighter_jet",
+    "class": "PLAYER_FIGHTER",
+    "vx": 3, "vy": 3,
     "lives": 8,
-    "hasLasers": true,
-    "hasBombs": true,
+    "hasLasers": true, "hasBombs": true,
     "fire_rate": 20,
     "symbol": "@",
-    "speed_mode_fast": true,
-    "q_was_down": false,
-    "weapon_id": "MACHINEGUN_ID",
-    "inventory": [
-      "MACHINEGUN_ID",
-      "LASRIFLE_PLAYER_ID",
-      "SHOTGUN_ID"
-    ],
-    "invuln_frames": 0,
-    "score": 0,
-    "class": "PLAYER_FIGHTER"
+    "weapon": "machinegun",
+    "inventory": ["machinegun", "laserrifle", "shotgun"]
   },
-  "flying_fortress": {
-    "px": "PLAYFIELD_W/2",
-    "py": "PLAYFIELD_H/3*2",
-    "vx": 1,
-    "vy": 1,
-    "dx": 1,
-    "dy": 1,
-    "alive": 1,
+  {
+    "name": "flying_fortress",
+    "class": "PLAYER_FORTRESS",
+    "vx": 1, "vy": 1,
     "lives": 8,
-    "hasLasers": true,
-    "hasBombs": true,
+    "hasLasers": true, "hasBombs": true,
     "fire_rate": 20,
     "symbol": "@",
-    "speed_mode_fast": true,
-    "q_was_down": false,
-    "weapon_id": "BOMB_PLAYER_ID",
-    "inventory": [
-      "BOMB_PLAYER_ID",
-      "MACHINEGUN_ID",
-      "MISSILE_PLAYER_ID"
-    ],
-    "invuln_frames": 0,
-    "score": 0,
-    "class": "PLAYER_FORTRESS"
+    "weapon": "bomblauncher",
+    "inventory": ["bomblauncher", "machinegun", "missilelauncher"]
   },
-  "experimental_fighter": {
-    "px": "PLAYFIELD_W/2",
-    "py": "PLAYFIELD_H/3*2",
-    "vx": 2,
-    "vy": 2,
-    "dx": 2,
-    "dy": 2,
-    "alive": 1,
+  {
+    "name": "experimental_fighter",
+    "class": "PLAYER_EXPERIMENTAL",
+    "vx": 2, "vy": 2,
     "lives": 8,
-    "hasLasers": true,
-    "hasBombs": true,
+    "hasLasers": true, "hasBombs": true,
     "fire_rate": 20,
     "symbol": "@",
-    "speed_mode_fast": true,
-    "q_was_down": false,
-    "weapon_id": "PLASMACANNON_ID",
-    "inventory": [
-      "PLASMACANNON_ID",
-      "SPIRAL_CANNON_ID"
-    ],
-    "invuln_frames": 0,
-    "score": 0,
-    "class": "PLAYER_EXPERIMENTAL"
-  },
-  "player_backup": {
-    "px": "PLAYFIELD_W/2",
-    "py": "PLAYFIELD_H/3*2",
-    "vx": 2,
-    "vy": 2,
-    "dx": 2,
-    "dy": 2,
-    "alive": 1,
-    "lives": 8,
-    "hasLasers": true,
-    "hasBombs": true,
-    "fire_rate": 20,
-    "symbol": "@",
-    "speed_mode_fast": true,
-    "q_was_down": false,
-    "weapon_id": "AUTOPISTOL_ID",
-    "inventory": [
-      "AUTOPISTOL_ID",
-      "MACHINEGUN_ID",
-      "LASRIFLE_PLAYER_ID",
-      "BOMB_PLAYER_ID",
-      "PLASMARIFLE_PLAYER_ID",
-      "MISSILE_PLAYER_ID",
-      "PLASMA_STORM_ID",
-      "GRAND_CANNON_ID",
-      "MINIGUN_ID"
-    ],
-    "invuln_frames": 0,
-    "score": 0,
-    "class": "PLAYER_DEBUG"
+    "weapon": "plasmacannon",
+    "inventory": ["plasmacannon", "spiral_cannon"]
   }
-}
+]

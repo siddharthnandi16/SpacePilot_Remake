@@ -28,4 +28,19 @@ typedef struct EnemyDefs{
 extern EnemyDefs enemy_defs[MAX_ENEMY_DEFS];
 extern int enemy_def_count;
 void LoadEnemyDefs(void);
+typedef struct PlayerDefs {
+    char name[32];
+    PlayerClass class;
+    float vx, vy;
+    int lives;
+    bool hasLasers, hasBombs;
+    int fire_rate;
+    char symbol;
+    char *weapon;                 // var_name of starting weapon
+    char *inventory[INV_SIZE];    // var_names, NULL = empty slot
+} PlayerDefs;
+extern PlayerDefs player_defs[MAX_PLAYER_TYPES];
+extern int player_def_count;
+void LoadPlayerDefs(void);
+void PlayerFromDef(Player *p, const PlayerDefs *d);
 #endif

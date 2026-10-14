@@ -215,3 +215,112 @@ void LoadEnemyDefs(void) {
     cJSON_Delete(root);
      fprintf(stderr, "\n Succesfully loaded enemy data. Enemy type count: %d", enemy_def_count, "     \n");
 }
+PlayerDefs player_defs[MAX_PLAYER_TYPES] = {0};
+int player_def_count = 0;
+
+static PlayerClass StringToPlayerClass(const char *s) {
+    static const EnumEntry table[] = {
+        {"PLAYER_DEBUG", PLAYER_DEBUG}, {"PLAYER_FIGHTER", PLAYER_FIGHTER},
+        {"PLAYER_FORTRESS", PLAYER_FORTRESS}, {"PLAYER_EXPERIMENTAL", PLAYER_EXPERIMENTAL}
+    };
+    return (PlayerClass)LookupEnum(table, sizeof table / sizeof table[0], s, PLAYER_DEBUG);
+}
+//Loads player data from the json file
+void LoadPlayerDefs(void) {
+    FILE *f = fopen("Data/players.json", "rb");
+    if (f == NULL) {
+        fprintf(stderr, "ERROR: Player file not opened!\n");
+        return;
+    }
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    rewind(f);
+
+    char *raw = malloc(size + 1);
+    if (raw == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        fclose(f);
+        return;
+    }
+    size_t n = fread(raw, 1, size, f);
+    raw[n] = '\0';
+    fclose(f);
+
+    cJSON *root = cJSON_Parse(raw);
+    free(raw);
+    if (!cJSON_IsArray(root)) {
+        fprintf(stderr, "JSON parse error in players.json\n");
+        cJSON_Delete(root);
+        return;
+    }
+
+    int i = 0;
+    cJSON *item;
+    cJSON_ArrayForEach(item, root) {
+        if (i >= MAX_PLAYER_TYPES) break;
+        PlayerDefs *p = &player_defs[i];
+        memset(p, 0, sizeof *p);
+
+        cJSON *name  = cJSON_GetObjectItemCaseSensitive(item, "name");
+        cJSON *cls   = cJSON_GetObjectItemCaseSensitive(item, "class");
+        cJSON *vx    = cJSON_GetObjectItemCaseSensitive(item, "vx");
+        cJSON *vy    = cJSON_GetObjectItemCaseSensitive(item, "vy");
+        cJSON *lives = cJSON_GetObjectItemCaseSensitive(item, "lives");
+        cJSON *las   = cJSON_GetObjectItemCaseSensitive(item, "hasLasers");
+        cJSON *bmb   = cJSON_GetObjectItemCaseSensitive(item, "hasBombs");
+        cJSON *fr    = cJSON_GetObjectItemCaseSensitive(item, "fire_rate");
+        cJSON *sym   = cJSON_GetObjectItemCaseSensitive(item, "symbol");
+        cJSON *wep   = cJSON_GetObjectItemCaseSensitive(item, "weapon");
+        cJSON *inv   = cJSON_GetObjectItemCaseSensitive(item, "inventory");
+
+        if (cJSON_IsString(name)) strncpy(p->name, name->valuestring, sizeof p->name - 1);
+        p->class = cJSON_IsString(cls) ? StringToPlayerClass(cls->valuestring) : PLAYER_DEBUG;
+        if (cJSON_IsNumber(vx))    p->vx = (float)vx->valuedouble;
+        if (cJSON_IsNumber(vy))    p->vy = (float)vy->valuedouble;
+        if (cJSON_IsNumber(lives)) p->lives = lives->valueint;
+        p->hasLasers = cJSON_IsTrue(las);
+        p->hasBombs  = cJSON_IsTrue(bmb);
+        if (cJSON_IsNumber(fr))    p->fire_rate = fr->valueint;
+        p->symbol = (cJSON_IsString(sym) && sym->valuestring[0] != '\0') ? sym->valuestring[0] : '@';
+        p->weapon = cJSON_IsString(wep) ? strdup(wep->valuestring) : NULL;
+
+        int k = 0;
+        cJSON *entry;
+        cJSON_ArrayForEach(entry, inv) {
+            if (k >= INV_SIZE) break;
+            if (cJSON_IsString(entry)) p->inventory[k++] = strdup(entry->valuestring);
+        }
+        i++;
+    }
+    player_def_count = i;
+
+    cJSON_Delete(root);
+    fprintf(stderr, "\n Successfully loaded player data. Player type count: %d", player_def_count);
+}
+
+// Builds a runtime Player from a def. Call after LoadWeapons().
+void PlayerFromDef(Player *p, const PlayerDefs *d) {
+    memset(p, 0, sizeof *p);
+    p->px = PLAYFIELD_W / 2;
+    p->py = (PLAYFIELD_H / 3) * 2;
+    p->vx = p->dx = d->vx;
+    p->vy = p->dy = d->vy;
+    p->alive = 1;
+    p->lives = d->lives;
+    p->hasLasers = d->hasLasers;
+    p->hasBombs = d->hasBombs;
+    p->fire_rate = d->fire_rate;
+    p->symbol = d->symbol;
+    p->speed_mode_fast = true;
+    p->class = d->class;
+
+    p->weapon_name = d->weapon;
+    p->weapon = find_weapon(d->weapon);
+    if (p->weapon) p->weapon_id = p->weapon->weapon_id;
+
+    for (int i = 0; i < INV_SIZE; i++) {
+        p->inventory_names[i] = d->inventory[i];
+        p->inventory_data[i]  = find_weapon(d->inventory[i]);
+        p->inventory[i] = p->inventory_data[i] ? p->inventory_data[i]->weapon_id : EMPTY_ID;
+    }
+}

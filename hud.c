@@ -29,7 +29,7 @@ mvwprintw(hud_win,1,9, "Score:");
 mvwprintw(hud_win,1,16, "%d",player->score);
 mvwprintw(hud_win,1,20, "Weapon:");
 //Currently has a minor visual bug where weapon name don't get erased fully upon swapping to a weapon with a shorter name
-WeaponType *current_weapon = get_weapon_template(player->weapon_id);
+WeaponType *current_weapon = player->inventory_data;
 char *weapon_name = current_weapon->display_name;
 mvwprintw(hud_win, 1, 27, "%-16s", "");
 mvwprintw(hud_win,1,27, "%s", weapon_name);
