@@ -68,6 +68,7 @@ typedef enum weapon_id {
 typedef enum modes{REGULAR, BURST_FIRE, RAPID_FIRE, SUPERCHARGE, CHARGING}FireModes;
 typedef struct WeaponType{
     char *display_name;
+    char *var_name;
     int cooldown_frames;
     int number; //Number of projectiles fired
     float angle; //Angle at which main projectile is fired

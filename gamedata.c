@@ -140,14 +140,11 @@ int boss_state_timer = 0;
  bool boss_fight_ongoing = FALSE;
  GameMode game_mode = 0;
 
-static void resolve_player(Player *p) {
-    const WeaponType *w = find_weapon(p->weapon_name);
-    p->weapon_id = w ? w->weapon_id : EMPTY_ID;
-
-    for (int i = 0; i < INV_SIZE; i++) {
-        w = p->inventory_names[i] ? find_weapon(p->inventory_names[i]) : NULL;
-        p->inventory_data[i] = w ? w->weapon_id : EMPTY_ID;
-    }
+ static void resolve_player(Player *p) {
+    p->weapon = find_weapon(p->weapon_name);
+    for (int i = 0; i < INV_SIZE; i++)
+        p->inventory_data[i] = p->inventory_names[i]
+            ? find_weapon(p->inventory_names[i]) : NULL;
 }
 void init_players(void) {   // call after LoadWeapons()
     resolve_player(&player);

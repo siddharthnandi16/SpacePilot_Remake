@@ -61,6 +61,7 @@ void ParseWeaponArray(cJSON *array, WeaponType *weapons, int *i, int max) {
         if (*i >= max) break;
         WeaponType *w = &weapons[*i];
 
+        cJSON *vname = cJSON_GetObjectItemCaseSensitive(item, "var_name");
         cJSON *name = cJSON_GetObjectItemCaseSensitive(item, "display_name");
         cJSON *cd   = cJSON_GetObjectItemCaseSensitive(item, "cooldown_frames");
         cJSON *num  = cJSON_GetObjectItemCaseSensitive(item, "number");
@@ -69,6 +70,7 @@ void ParseWeaponArray(cJSON *array, WeaponType *weapons, int *i, int max) {
         cJSON *mode = cJSON_GetObjectItemCaseSensitive(item, "modes");
         cJSON *id   = cJSON_GetObjectItemCaseSensitive(item, "weapon_id");
 
+        if (cJSON_IsString(vname)) w->var_name = strdup(vname->valuestring);
         if (cJSON_IsString(name)) w->display_name = strdup(name->valuestring);
         if (cJSON_IsNumber(cd))   w->cooldown_frames = cd->valueint;
         if (cJSON_IsNumber(num))  w->number = num->valueint;
@@ -103,7 +105,6 @@ fclose(weapon_file);
 cJSON *root = cJSON_Parse(weapons_raw);
 if (root == NULL) {
     fprintf(stderr, "JSON parse error\n");
-    fclose(weapon_file);
     free(weapons_raw);
     return;
 }
@@ -125,7 +126,7 @@ free(weapons_raw);
 const WeaponType *find_weapon(const char *name) {
     if (!name) return NULL;
     for (int i = 0; i < weapon_count; i++)
-        if (strcmp(weapons[i].display_name, name) == 0)
+        if (weapons[i].var_name != NULL && strcmp(weapons[i].var_name, name) == 0)
             return &weapons[i];
     return NULL;
 }

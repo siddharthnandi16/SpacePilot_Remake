@@ -47,6 +47,7 @@ Projectile projectiles_backup[MAX_PROJECTILES] = {
     }
 };
 //List of player weapon types. All player weapons are in lowercase
+// OUTDATED, DO NOT REFERENCE
  WeaponType autopistol = {
    .display_name = "Autocannon", .cooldown_frames = 4, .number = 1, .angle= 90, .type= BULLET, .modes =  REGULAR
 ,.weapon_id = AUTOPISTOL_ID
