@@ -1,5 +1,9 @@
 #include <pdcurses.h>
 #include "gamedata.h"
+#include "parser.h"
+#define DEBUG_INVENTORY { "autopistol", "machinegun", "laserrifle",       \
+    "bomblauncher", "plasmarifle", "missilelauncher", "Plasma_Storm",           \
+    "Grand_Cannon", "Minigun" }
 // This file stores data on players, enemies and bullets
 /* struct Player{
     float px, py; //Stores the player's position
@@ -18,6 +22,7 @@
 // Commented out since it conflicts with the typedef in gamedata.h
 //Bool that stores whether the player is moving diagonally
 bool moving_diagonally = FALSE;
+
 struct Player player = {
     .px = PLAYFIELD_W/2, .py = (PLAYFIELD_H)/3*2,
     .vx = 2, .vy = 2,
@@ -36,7 +41,9 @@ struct Player player = {
     // For debug purposes, all implemented weapons are given to the player 
     .invuln_frames = 0,
     .score =0,
-    .class = PLAYER_DEBUG
+    .class = PLAYER_DEBUG,
+    .weapon_name = "autopistol",
+.inventory_names = DEBUG_INVENTORY
 };
 // Fast but with weaker weapons
 struct Player fighter_jet = {
@@ -54,7 +61,10 @@ struct Player fighter_jet = {
     .inventory = {MACHINEGUN_ID, LASRIFLE_PLAYER_ID, SHOTGUN_ID}, 
     .invuln_frames = 0,
     .score =0,
-    .class = PLAYER_FIGHTER
+    .class = PLAYER_FIGHTER,
+   .weapon_name = "machinegun",
+.inventory_names = {"machinegun", "laserrifle", "shotgun"}
+
 };
 //Slow but has access to many strong weapons
 struct Player flying_fortress= {
@@ -72,7 +82,9 @@ struct Player flying_fortress= {
     .inventory = {BOMB_PLAYER_ID, MACHINEGUN_ID, MISSILE_PLAYER_ID}, 
     .invuln_frames = 0,
     .score =0,
-    .class = PLAYER_FORTRESS
+    .class = PLAYER_FORTRESS,
+    .weapon_name = "bomblauncher",
+.inventory_names = {"bomblauncher", "machinegun", "missilelauncher"},
 };
 //Supposed to have experimental and high-tech weapons like the plasma rifle, EMP and chain lightning
 struct Player experimental_fighter= {
@@ -90,7 +102,9 @@ struct Player experimental_fighter= {
     .inventory = {PLASMACANNON_ID, SPIRAL_CANNON_ID}, 
     .invuln_frames = 0,
     .score =0,
-    .class = PLAYER_EXPERIMENTAL
+    .class = PLAYER_EXPERIMENTAL,
+    .weapon_name = "plasmacannon",
+.inventory_names = {"plasmacannon", "spiral_cannon"},
 };
 //Backup version of player struct. ALWAYS KEEP IT THE SAME AS THE PLAYER STRUCT
 struct Player player_backup = {
@@ -111,7 +125,9 @@ struct Player player_backup = {
     // For debug purpose, all implemented weapons are given to the player 
     .invuln_frames = 0,
     .score = 0,
-    .class = PLAYER_DEBUG
+    .class = PLAYER_DEBUG,
+    .weapon_name = "autopistol",
+.inventory_names = DEBUG_INVENTORY
 };
 bool Level_Complete = FALSE;
 BossState state = BOSS_NORMAL;
@@ -123,4 +139,20 @@ int boss_state_timer = 0;
  bool continued = FALSE;
  bool boss_fight_ongoing = FALSE;
  GameMode game_mode = 0;
-  
+
+static void resolve_player(Player *p) {
+    const WeaponType *w = find_weapon(p->weapon_name);
+    p->weapon_id = w ? w->weapon_id : EMPTY_ID;
+
+    for (int i = 0; i < INV_SIZE; i++) {
+        w = p->inventory_names[i] ? find_weapon(p->inventory_names[i]) : NULL;
+        p->inventory_data[i] = w ? w->weapon_id : EMPTY_ID;
+    }
+}
+void init_players(void) {   // call after LoadWeapons()
+    resolve_player(&player);
+    resolve_player(&fighter_jet);
+    resolve_player(&flying_fortress);
+    resolve_player(&experimental_fighter);
+    resolve_player(&player_backup);
+}

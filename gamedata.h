@@ -78,6 +78,7 @@ typedef struct WeaponType{
     FireModes modes;
 }WeaponType;
 typedef enum PlayerClass{PLAYER_DEBUG, PLAYER_FIGHTER, PLAYER_FORTRESS, PLAYER_EXPERIMENTAL}PlayerClass;
+#define INV_SIZE 10
 typedef struct Player{
     float px, py; //Stores the player's position
     float vx, vy; // Stores the player's standard movement speed
@@ -94,6 +95,10 @@ typedef struct Player{
     int invuln_frames; //Period of invulnerability granted after taking a hit
     int score; //Increments upon destroyed enemies
     enum PlayerClass class;
+    const char *weapon_name;              // var_name of the active weapon
+    const char *inventory_names[INV_SIZE]; // var_names, NULL = empty slot
+    const WeaponType *weapon;             // resolved by init_players / on switch
+    const WeaponType *inventory_data[INV_SIZE];
 }Player;
 extern Player player;
 extern Player fighter_jet;
@@ -175,4 +180,5 @@ extern bool Level_Complete;
 extern char continue_choice;
 extern bool continued; //Meant to gate access to a secret level that will be added later
 extern GameMode game_mode;
+void init_players(void);
 #endif

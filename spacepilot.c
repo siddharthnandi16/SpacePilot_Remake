@@ -33,6 +33,7 @@ int game_over =0; //1= true, 0=false
 void LoadData(){
     LoadWeapons();
     LoadEnemyDefs();
+    init_players();
 }
 //This function sets the player's current movement speed to their top speed
 void setplayermovement(struct Player *player){

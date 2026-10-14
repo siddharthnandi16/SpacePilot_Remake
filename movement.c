@@ -117,10 +117,31 @@ if (rightward_movement == TRUE) new_px = player->px + player->dx;
     player->py = new_py;
     return quit;
 }
-
-//Function that fires player weapons
 #define NUM_WEAPON_SLOTS 9
 void fire_player(Player *player) {
+    static bool switch_key_was_down[NUM_WEAPON_SLOTS] = {false};
+    int slot_keys[NUM_WEAPON_SLOTS] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+    // Switches weapons once per click
+    for (int i = 0; i < NUM_WEAPON_SLOTS; i++) {
+        bool key_down = (GetAsyncKeyState(slot_keys[i]) & 0x8000) != 0;
+        if (key_down && !switch_key_was_down[i] && player->inventory_data[i]) {
+            player->weapon = player->inventory_data[i];
+        }
+        switch_key_was_down[i] = key_down;
+    }
+
+    // Firing - held, gated by cooldown
+    player->fire_rate++;
+    bool fire_key_down = (GetAsyncKeyState('Z') & 0x8000) != 0;
+    if (fire_key_down && player->weapon != NULL
+        && player->fire_rate >= player->weapon->cooldown_frames) {
+        fire_weapon(player->weapon, player->px, player->py - 1, 90, TRUE);
+        player->fire_rate = 0;
+    }
+}
+//Function that fires player weapons(old)
+/* void fire_player(Player *player) { 
     static bool switch_key_was_down[NUM_WEAPON_SLOTS] = {false};
     int slot_keys[NUM_WEAPON_SLOTS] = {'1', '2', '3', '4', '5', '6', '7','8','9'};
 
@@ -147,3 +168,4 @@ void fire_player(Player *player) {
         }
     }
 }
+*/

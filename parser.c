@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "cJSON.h"
 #include  "gamedata.h"
-#include "string.h"
+#include <string.h>
 #include "parser.h"
 
 WeaponType weapons[MAX_WEAPON_TYPES] = {0};
@@ -121,7 +121,14 @@ cJSON_Delete(root);
  fprintf(stderr, "\n Succesfully loaded weapons. Weapon count: %d", weapon_count, "     \n");
 free(weapons_raw);
 }
-
+//Function to find weapons from strings
+const WeaponType *find_weapon(const char *name) {
+    if (!name) return NULL;
+    for (int i = 0; i < weapon_count; i++)
+        if (strcmp(weapons[i].display_name, name) == 0)
+            return &weapons[i];
+    return NULL;
+}
 
 
 
