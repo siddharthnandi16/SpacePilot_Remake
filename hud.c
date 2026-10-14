@@ -29,21 +29,21 @@ mvwprintw(hud_win,1,9, "Score:");
 mvwprintw(hud_win,1,16, "%d",player->score);
 mvwprintw(hud_win,1,20, "Weapon:");
 //Currently has a minor visual bug where weapon name don't get erased fully upon swapping to a weapon with a shorter name
-WeaponType *current_weapon = player->inventory_data;
-char *weapon_name = current_weapon->display_name;
-mvwprintw(hud_win, 1, 27, "%-16s", "");
-mvwprintw(hud_win,1,27, "%s", weapon_name);
-if (player->fire_rate < current_weapon->cooldown_frames){
+WeaponType *current_weapon = player->weapon;
+if (current_weapon) {
+    mvwprintw(hud_win, 1, 27, "%-16s", "");
+    mvwprintw(hud_win, 1, 27, "%s", current_weapon->display_name);
     mvwprintw(hud_win, 1, 43, "%-13s", "");
-    mvwprintw(hud_win,1,43, "LOADING");
-}
-else {
-    wattroff(hud_win, COLOR_PAIR(12));
-    wattron(hud_win, COLOR_PAIR(10));
-    mvwprintw(hud_win, 1, 43, "%-13s", "");
-mvwprintw(hud_win,1,43, "READY TO FIRE");
-wrefresh(hud_win);
-wattroff(hud_win, COLOR_PAIR(10));
+    if (player->fire_rate < current_weapon->cooldown_frames) {
+        wattron(hud_win, COLOR_PAIR(12));
+        mvwprintw(hud_win, 1, 43, "LOADING");
+        wattroff(hud_win, COLOR_PAIR(12));
+    }
+    else {
+        wattron(hud_win, COLOR_PAIR(10));
+        mvwprintw(hud_win, 1, 43, "READY TO FIRE");
+        wattroff(hud_win, COLOR_PAIR(10));
+    }
 }
 wattron(hud_win, COLOR_PAIR(12));
 mvwprintw(hud_win,1,57, "Speed:");

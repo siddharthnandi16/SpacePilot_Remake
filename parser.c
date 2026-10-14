@@ -69,6 +69,8 @@ void ParseWeaponArray(cJSON *array, WeaponType *weapons, int *i, int max) {
         cJSON *type = cJSON_GetObjectItemCaseSensitive(item, "type");
         cJSON *mode = cJSON_GetObjectItemCaseSensitive(item, "modes");
         cJSON *id   = cJSON_GetObjectItemCaseSensitive(item, "weapon_id");
+        cJSON *off  = cJSON_GetObjectItemCaseSensitive(item, "offset_angle");
+cJSON *omni = cJSON_GetObjectItemCaseSensitive(item, "omnidirectional");
 
         if (cJSON_IsString(vname)) w->var_name = strdup(vname->valuestring);
         if (cJSON_IsString(name)) w->display_name = strdup(name->valuestring);
@@ -79,7 +81,8 @@ void ParseWeaponArray(cJSON *array, WeaponType *weapons, int *i, int max) {
         if (cJSON_IsString(type)) w->type = StringToProjType(type->valuestring);
         if (cJSON_IsString(mode)) w->modes = StringToFireModes(mode->valuestring);
         if (cJSON_IsString(id))   w->weapon_id = StringToWeaponID(id->valuestring);
-
+        if (cJSON_IsNumber(off))  w->offset_angle = (float)off->valuedouble;
+        if (cJSON_IsBool(omni))   w->omnidirectional = cJSON_IsTrue(omni);
         (*i)++;
     }
 }

@@ -8,6 +8,7 @@
 #include "dialogue.h"
 #include "enemy.h"
 #include "window.h"
+#include "parser.h"
 extern int unsigned long tick;
 extern int spawn_table_count_1;
 int rows_scrolled;
@@ -286,33 +287,29 @@ void Check_Boss_Fight(){
     }
 }
 //Function to grant the player new weapons upon completing a stage
+static void set_inventory_slot(Player *p, int slot, const char *var_name) {
+    const WeaponType *w = find_weapon(var_name);
+    if (w == NULL || slot < 0 || slot >= INV_SIZE) return;
+    p->inventory_names[slot] = w->var_name;
+    p->inventory_data[slot]  = w;
+    p->inventory[slot]       = w->weapon_id;
+}
+
 void New_Weapons(Player *player){
-    if(current_level >= 2){
-        switch(player->class){
-            case PLAYER_FIGHTER:
-            player->inventory[3] = SPIRAL_CANNON_ID;
-            break;
-            case PLAYER_FORTRESS:
-            player->inventory[3] = MISSILE_STORM_ID;
-            break;
-            case PLAYER_EXPERIMENTAL:
-            player->inventory[3] = PLASMARIFLE_PLAYER_ID;
-            default: 
-            break;
+    if (current_level >= 2) {
+        switch (player->class) {
+            case PLAYER_FIGHTER:      set_inventory_slot(player, 3, "spiral_cannon"); break;
+            case PLAYER_FORTRESS:     set_inventory_slot(player, 3, "missilestorm");  break;
+            case PLAYER_EXPERIMENTAL: set_inventory_slot(player, 3, "plasmarifle");   break;
+            default: break;
         }
     }
-    if(current_level >= 3){
-        switch(player->class){
-            case PLAYER_FIGHTER:
-            player->inventory[4] = MINIGUN_ID;
-            break;
-            case PLAYER_FORTRESS:
-            player->inventory[4] = GRAND_CANNON_ID;
-            break;
-            case PLAYER_EXPERIMENTAL:
-            player->inventory[4] = PLASMA_STORM_ID;
-            default: 
-            break;
+    if (current_level >= 3) {
+        switch (player->class) {
+            case PLAYER_FIGHTER:      set_inventory_slot(player, 4, "Minigun");       break;
+            case PLAYER_FORTRESS:     set_inventory_slot(player, 4, "Grand_Cannon");  break;
+            case PLAYER_EXPERIMENTAL: set_inventory_slot(player, 4, "Plasma_Storm");  break;
+            default: break;
         }
     }
 }
